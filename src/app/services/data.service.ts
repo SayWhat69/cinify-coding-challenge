@@ -5,6 +5,7 @@ import {
   AppointmentDataResponse,
   Appointment,
   WeeklyStatistic,
+  DailyStatistic,
   DoctorStatistic,
   TreatmentTypeStatistic,
   Exclusion,
@@ -121,6 +122,25 @@ export class DataService {
         };
       });
 
+    // 3b. Daily statistics for the last 7 days that have data
+    const dayGroups = groupBy(regular, (t) => t.date.slice(0, 10));
+    const lastDayKeys = Array.from(dayGroups.keys()).sort().slice(-7);
+    const days: DailyStatistic[] = lastDayKeys.map((day) => {
+      const terms = dayGroups.get(day)!;
+      const capacityMinutes = doctorCount * capacityPerDayPerDoctor;
+
+      const bookedMinutes = sum(terms.map((t) => t.correctedDuration));
+      const completed = terms.filter((t) => t.status === 'attended');
+      const completedMinutes = sum(completed.map((t) => t.correctedDuration));
+
+      return {
+        day,
+        dateLabel: `${weekdayLabel(new Date(terms[0].date))} ${formatDate(day)}`,
+        bookedPercent: round1((bookedMinutes / capacityMinutes) * 100),
+        completedPercent: round1((completedMinutes / capacityMinutes) * 100),
+      };
+    });
+
     // 4. Utilization per doctor (over the entire period, completed)
     const totalDays = new Set(regular.map((t) => t.date.slice(0, 10))).size;
     const doctorGroups = groupBy(regular, (t) => t.doctor);
@@ -161,6 +181,7 @@ export class DataService {
         noShowCount: totalNoShow,
       },
       weeks,
+      days,
       doctors,
       treatmentTypes,
       exclusions,
@@ -219,4 +240,10 @@ function formatDate(iso: string): string {
 
 function formatTime(date: Date): string {
   return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+}
+
+const WEEKDAY_LABELS = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
+
+function weekdayLabel(date: Date): string {
+  return WEEKDAY_LABELS[date.getDay()];
 }

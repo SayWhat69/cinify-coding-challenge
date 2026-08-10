@@ -39,6 +39,39 @@
   margin-bottom: 14px;
 }
 
+.panel-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.view-toggle {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.view-toggle button {
+  border: none;
+  background: var(--panel);
+  padding: 6px 12px;
+  font-size: 12px;
+  font-family: inherit;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.view-toggle button:not(:last-child) {
+  border-right: 1px solid var(--border);
+}
+.view-toggle button.active {
+  background: var(--teal-soft);
+  color: var(--teal);
+  font-weight: 600;
+}
+
 .legend-row {
   display: flex;
   gap: 18px;

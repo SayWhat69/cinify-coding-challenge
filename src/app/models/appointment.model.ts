@@ -24,6 +24,19 @@ export interface WeeklyStatistic {
   completedPercent: number;
 }
 
+export interface DailyStatistic {
+  day: string;
+  dateLabel: string;
+  bookedPercent: number;
+  completedPercent: number;
+}
+
+export interface TrendPoint {
+  label: string;
+  bookedPercent: number;
+  completedPercent: number;
+}
+
 export interface DoctorStatistic {
   doctor: string;
   utilizationPercent: number;
@@ -53,6 +66,7 @@ export interface DashboardData {
     noShowCount: number;
   };
   weeks: WeeklyStatistic[];
+  days: DailyStatistic[];
   doctors: DoctorStatistic[];
   treatmentTypes: TreatmentTypeStatistic[];
   exclusions: Exclusion[];

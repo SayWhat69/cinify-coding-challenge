@@ -9,7 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
-import { WeeklyStatistic } from '../../models/appointment.model';
+import { TrendPoint } from '../../models/appointment.model';
 
 Chart.register(...registerables);
 
@@ -30,7 +30,7 @@ Chart.register(...registerables);
   ],
 })
 export class TrendChartComponent implements AfterViewInit, OnChanges, OnDestroy {
-  @Input() weeks: WeeklyStatistic[] = [];
+  @Input() points: TrendPoint[] = [];
   @ViewChild('canvas') canvasRef!: ElementRef<HTMLCanvasElement>;
 
   private chart?: Chart;
@@ -40,7 +40,7 @@ export class TrendChartComponent implements AfterViewInit, OnChanges, OnDestroy 
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['weeks'] && this.canvasRef) {
+    if (changes['points'] && this.canvasRef) {
       this.render();
     }
   }
@@ -50,17 +50,17 @@ export class TrendChartComponent implements AfterViewInit, OnChanges, OnDestroy 
   }
 
   private render(): void {
-    if (!this.canvasRef || this.weeks.length === 0) return;
+    if (!this.canvasRef || this.points.length === 0) return;
     this.chart?.destroy();
 
     const config: ChartConfiguration<'line'> = {
       type: 'line',
       data: {
-        labels: this.weeks.map((w) => `${w.week} (${w.periodLabel})`),
+        labels: this.points.map((p) => p.label),
         datasets: [
           {
             label: 'Gebucht',
-            data: this.weeks.map((w) => w.bookedPercent),
+            data: this.points.map((p) => p.bookedPercent),
             borderColor: '#6B7A8D',
             backgroundColor: 'rgba(107,122,141,0.08)',
             borderWidth: 2,
@@ -70,7 +70,7 @@ export class TrendChartComponent implements AfterViewInit, OnChanges, OnDestroy 
           },
           {
             label: 'Realisiert',
-            data: this.weeks.map((w) => w.completedPercent),
+            data: this.points.map((p) => p.completedPercent),
             borderColor: '#0F6E6E',
             backgroundColor: 'rgba(15,110,110,0.12)',
             borderWidth: 2.5,

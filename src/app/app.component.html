@@ -11,15 +11,23 @@
   <app-kpi-cards [totals]="d.totals"></app-kpi-cards>
 
   <div class="panel">
-    <h2>Auslastung im Wochenverlauf</h2>
-    <div class="panel-sub">
-      Gebucht vs. tatsächlich wahrgenommen — die Fläche dazwischen ist ungenutzte Kapazität
+    <div class="panel-title-row">
+      <div>
+        <h2>{{ trendViewMode === 'day' ? 'Auslastung im Tagesverlauf (letzte 7 Tage)' : 'Auslastung im Wochenverlauf' }}</h2>
+        <div class="panel-sub">
+          Gebucht vs. tatsächlich wahrgenommen — die Fläche dazwischen ist ungenutzte Kapazität
+        </div>
+      </div>
+      <div class="view-toggle">
+        <button type="button" [class.active]="trendViewMode === 'week'" (click)="setTrendViewMode('week')">Wochen</button>
+        <button type="button" [class.active]="trendViewMode === 'day'" (click)="setTrendViewMode('day')">Letzte 7 Tage</button>
+      </div>
     </div>
     <div class="legend-row">
       <div class="legend-item"><span class="dot" style="background: var(--slate)"></span>Gebucht</div>
       <div class="legend-item"><span class="dot" style="background: var(--teal)"></span>Realisiert</div>
     </div>
-    <app-trend-chart [weeks]="d.weeks"></app-trend-chart>
+    <app-trend-chart [points]="trendPoints"></app-trend-chart>
   </div>
 
   <div class="grid-2">
