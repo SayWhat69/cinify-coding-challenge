@@ -1,0 +1,44 @@
+<div class="wrap">
+  <div class="topbar">
+    <div>
+      <h1>{{ daten.praxis }}</h1>
+      <div class="sub">
+        Terminauslastung · {{ daten.zeitraumLabel }} · {{ daten.oeffnungszeitenHinweis }}
+      </div>
+    </div>
+  </div>
+
+  <app-kpi-cards [gesamt]="daten.gesamt"></app-kpi-cards>
+
+  <div class="panel">
+    <h2>Auslastung im Wochenverlauf</h2>
+    <div class="panel-sub">
+      Gebucht vs. tatsächlich wahrgenommen — die Fläche dazwischen ist ungenutzte Kapazität
+    </div>
+    <div class="legend-row">
+      <div class="legend-item"><span class="dot" style="background: var(--slate)"></span>Gebucht</div>
+      <div class="legend-item"><span class="dot" style="background: var(--teal)"></span>Realisiert</div>
+    </div>
+    <app-trend-chart [wochen]="daten.wochen"></app-trend-chart>
+  </div>
+
+  <div class="grid-2">
+    <div class="panel">
+      <h2>Auslastung pro Arzt</h2>
+      <div class="panel-sub">Realisierte Behandlungszeit ÷ verfügbare Kapazität</div>
+      <app-arzt-auslastung [aerzte]="daten.aerzte"></app-arzt-auslastung>
+    </div>
+
+    <div class="panel">
+      <h2>Behandlungsarten</h2>
+      <div class="panel-sub">Anzahl Termine im Zeitraum</div>
+      <app-behandlungsarten [behandlungsarten]="daten.behandlungsarten"></app-behandlungsarten>
+    </div>
+  </div>
+
+  <app-data-quality-banner
+    [ausschluesse]="daten.ausschluesse"
+    [fehlenderStatus]="daten.fehlenderStatus"
+    [korrigierteDauerAnzahl]="daten.korrigierteDauerAnzahl"
+  ></app-data-quality-banner>
+</div>

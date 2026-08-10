@@ -1,0 +1,16 @@
+<div class="dq" *ngIf="ausschluesse.length || fehlenderStatus || korrigierteDauerAnzahl">
+  <strong>
+    Datenqualität — {{ ausschluesse.length }} Termin(e) aus der Kapazitätsrechnung ausgeschlossen
+  </strong>
+  <ul>
+    <li *ngFor="let a of ausschluesse">
+      {{ a.grund }} ({{ a.termin_id }}, {{ a.datum | date: 'dd.MM.yy' }})
+    </li>
+    <li *ngIf="korrigierteDauerAnzahl > 0">
+      {{ korrigierteDauerAnzahl }} Termin(e) mit 0 Min. Dauer — Wert auf Median der Behandlungsart korrigiert statt ausgeschlossen
+    </li>
+    <li *ngIf="fehlenderStatus > 0">
+      {{ fehlenderStatus }} Termin(e) ohne Status — zählen als "gebucht", nicht als "realisiert"
+    </li>
+  </ul>
+</div>

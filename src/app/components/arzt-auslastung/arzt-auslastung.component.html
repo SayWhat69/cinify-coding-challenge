@@ -1,0 +1,9 @@
+<div class="arzt-row" *ngFor="let a of aerzte">
+  <div class="top-line">
+    <span class="name">{{ a.arzt }}</span>
+    <span class="pct">{{ a.auslastungProzent | number: '1.1-1' }}&nbsp;%</span>
+  </div>
+  <div class="bar-track">
+    <div class="bar-fill" [style.width.%]="a.auslastungProzent"></div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<div class="ba-row" *ngFor="let b of behandlungsarten">
+  <div class="ba-label" [title]="b.behandlungsart">{{ b.behandlungsart }}</div>
+  <div class="ba-track">
+    <div class="ba-fill" [style.width.%]="(b.anzahl / maxAnzahl) * 100"></div>
+  </div>
+  <div class="ba-count">{{ b.anzahl }}</div>
+</div>
