@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DashboardData } from './models/appointment.model';
-import { MOCK_DASHBOARD_DATA } from './mock/mock-data';
 import { KpiCardsComponent } from './components/kpi-cards/kpi-cards.component';
 import { TrendChartComponent } from './components/trend-chart/trend-chart.component';
 import { DoctorUtilizationComponent } from './components/doctor-utilization/doctor-utilization.component';
