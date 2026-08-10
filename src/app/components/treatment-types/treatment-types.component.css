@@ -1,14 +1,14 @@
-.ba-row {
+.type-row {
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 9px;
   font-size: 12.5px;
 }
-.ba-row:last-child {
+.type-row:last-child {
   margin-bottom: 0;
 }
-.ba-label {
+.type-label {
   width: 150px;
   flex-shrink: 0;
   color: var(--ink-soft);
@@ -16,19 +16,19 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.ba-track {
+.type-track {
   flex: 1;
   height: 7px;
   background: var(--slate-soft);
   border-radius: 4px;
   overflow: hidden;
 }
-.ba-fill {
+.type-fill {
   height: 100%;
   background: var(--slate);
   border-radius: 4px;
 }
-.ba-count {
+.type-count {
   width: 24px;
   text-align: right;
   font-family: 'IBM Plex Mono', monospace;

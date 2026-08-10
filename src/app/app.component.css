@@ -65,13 +65,13 @@
   margin-bottom: 14px;
 }
 
-.lade-hinweis,
-.fehler-hinweis {
+.loading-hint,
+.error-hint {
   padding: 40px 0;
   color: var(--ink-soft);
   text-align: center;
 }
-.fehler-hinweis {
+.error-hint {
   color: var(--red);
 }
 

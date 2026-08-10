@@ -1,22 +1,22 @@
 <div class="kpis">
   <div class="kpi accent-teal">
     <div class="label">Realisierte Auslastung</div>
-    <div class="value">{{ gesamt.realisiertProzent | number: '1.1-1' }}&nbsp;%</div>
+    <div class="value">{{ totals.completedPercent | number: '1.1-1' }}&nbsp;%</div>
     <div class="delta">Ø über den gesamten Zeitraum</div>
   </div>
   <div class="kpi">
     <div class="label">Gebuchte Auslastung</div>
-    <div class="value">{{ gesamt.gebuchtProzent | number: '1.1-1' }}&nbsp;%</div>
+    <div class="value">{{ totals.bookedPercent | number: '1.1-1' }}&nbsp;%</div>
     <div class="delta">Kalender vs. Kapazität</div>
   </div>
   <div class="kpi accent-amber">
     <div class="label">Verlorene Kapazität</div>
-    <div class="value">{{ gesamt.lueckeProzent | number: '1.1-1' }}&nbsp;%</div>
+    <div class="value">{{ totals.gapPercent | number: '1.1-1' }}&nbsp;%</div>
     <div class="delta down">durch No-Shows &amp; Absagen</div>
   </div>
   <div class="kpi">
     <div class="label">No-Show-Quote</div>
-    <div class="value">{{ gesamt.noShowQuoteProzent | number: '1.1-1' }}&nbsp;%</div>
-    <div class="delta">{{ gesamt.anzahlNoShow }} von {{ gesamt.anzahlTermineGesamt }} Terminen</div>
+    <div class="value">{{ totals.noShowRatePercent | number: '1.1-1' }}&nbsp;%</div>
+    <div class="delta">{{ totals.noShowCount }} von {{ totals.totalAppointmentCount }} Terminen</div>
   </div>
 </div>

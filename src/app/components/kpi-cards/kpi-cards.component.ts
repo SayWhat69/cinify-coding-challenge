@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { DashboardDaten } from '../../models/termin.model';
+import { DashboardData } from '../../models/appointment.model';
 
 @Component({
   selector: 'app-kpi-cards',
@@ -10,5 +10,5 @@ import { DashboardDaten } from '../../models/termin.model';
   styleUrl: './kpi-cards.component.css',
 })
 export class KpiCardsComponent {
-  @Input({ required: true }) gesamt!: DashboardDaten['gesamt'];
+  @Input({ required: true }) totals!: DashboardData['totals'];
 }

@@ -1,0 +1,7 @@
+<div class="type-row" *ngFor="let b of treatmentTypes">
+  <div class="type-label" [title]="b.treatmentType">{{ b.treatmentType }}</div>
+  <div class="type-track">
+    <div class="type-fill" [style.width.%]="(b.count / maxCount) * 100"></div>
+  </div>
+  <div class="type-count">{{ b.count }}</div>
+</div>

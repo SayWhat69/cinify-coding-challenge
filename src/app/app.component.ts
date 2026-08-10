@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { DashboardDaten } from './models/termin.model';
-import { MOCK_DASHBOARD_DATEN } from './mock/mock-daten';
+import { Component, OnInit } from '@angular/core';
+import { DashboardData } from './models/appointment.model';
+import { MOCK_DASHBOARD_DATA } from './mock/mock-data';
 import { KpiCardsComponent } from './components/kpi-cards/kpi-cards.component';
 import { TrendChartComponent } from './components/trend-chart/trend-chart.component';
-import { ArztAuslastungComponent } from './components/arzt-auslastung/arzt-auslastung.component';
-import { BehandlungsartenComponent } from './components/behandlungsarten/behandlungsarten.component';
+import { DoctorUtilizationComponent } from './components/doctor-utilization/doctor-utilization.component';
+import { TreatmentTypesComponent } from './components/treatment-types/treatment-types.component';
 import { DataQualityBannerComponent } from './components/data-quality-banner/data-quality-banner.component';
+import { DataService } from './services/data.service';
 
 @Component({
   selector: 'app-root',
@@ -15,14 +16,19 @@ import { DataQualityBannerComponent } from './components/data-quality-banner/dat
     CommonModule,
     KpiCardsComponent,
     TrendChartComponent,
-    ArztAuslastungComponent,
-    BehandlungsartenComponent,
+    DoctorUtilizationComponent,
+    TreatmentTypesComponent,
     DataQualityBannerComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
-  // TODO: durch echte, aufbereitete Daten ersetzen (z.B. via @Input oder eigenem Service)
-  daten: DashboardDaten = MOCK_DASHBOARD_DATEN;
+export class AppComponent implements OnInit {
+  // TODO: replace with real, processed data (e.g. via @Input or a dedicated service)
+  constructor(private dataService: DataService) {}
+  public data?: DashboardData;
+
+  ngOnInit(): void {
+    this.dataService.loadData().subscribe((data) => this.data = data);
+  }
 }

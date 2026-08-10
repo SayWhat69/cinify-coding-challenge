@@ -1,14 +1,14 @@
-<div class="wrap">
+<div class="wrap" *ngIf="data as d">
   <div class="topbar">
     <div>
-      <h1>{{ daten.praxis }}</h1>
+      <h1>{{ d.practice }}</h1>
       <div class="sub">
-        Terminauslastung · {{ daten.zeitraumLabel }} · {{ daten.oeffnungszeitenHinweis }}
+        Terminauslastung · {{ d.periodLabel }} · {{ d.openingHoursNote }}
       </div>
     </div>
   </div>
 
-  <app-kpi-cards [gesamt]="daten.gesamt"></app-kpi-cards>
+  <app-kpi-cards [totals]="d.totals"></app-kpi-cards>
 
   <div class="panel">
     <h2>Auslastung im Wochenverlauf</h2>
@@ -19,26 +19,26 @@
       <div class="legend-item"><span class="dot" style="background: var(--slate)"></span>Gebucht</div>
       <div class="legend-item"><span class="dot" style="background: var(--teal)"></span>Realisiert</div>
     </div>
-    <app-trend-chart [wochen]="daten.wochen"></app-trend-chart>
+    <app-trend-chart [weeks]="d.weeks"></app-trend-chart>
   </div>
 
   <div class="grid-2">
     <div class="panel">
       <h2>Auslastung pro Arzt</h2>
       <div class="panel-sub">Realisierte Behandlungszeit ÷ verfügbare Kapazität</div>
-      <app-arzt-auslastung [aerzte]="daten.aerzte"></app-arzt-auslastung>
+      <app-doctor-utilization [doctors]="d.doctors"></app-doctor-utilization>
     </div>
 
     <div class="panel">
       <h2>Behandlungsarten</h2>
       <div class="panel-sub">Anzahl Termine im Zeitraum</div>
-      <app-behandlungsarten [behandlungsarten]="daten.behandlungsarten"></app-behandlungsarten>
+      <app-treatment-types [treatmentTypes]="d.treatmentTypes"></app-treatment-types>
     </div>
   </div>
 
   <app-data-quality-banner
-    [ausschluesse]="daten.ausschluesse"
-    [fehlenderStatus]="daten.fehlenderStatus"
-    [korrigierteDauerAnzahl]="daten.korrigierteDauerAnzahl"
+    [exclusions]="d.exclusions"
+    [missingStatusCount]="d.missingStatusCount"
+    [correctedDurationCount]="d.correctedDurationCount"
   ></app-data-quality-banner>
 </div>

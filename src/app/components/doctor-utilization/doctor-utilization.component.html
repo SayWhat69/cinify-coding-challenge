@@ -1,0 +1,9 @@
+<div class="doctor-row" *ngFor="let a of doctors">
+  <div class="top-line">
+    <span class="name">{{ a.doctor }}</span>
+    <span class="pct">{{ a.utilizationPercent | number: '1.1-1' }}&nbsp;%</span>
+  </div>
+  <div class="bar-track">
+    <div class="bar-fill" [style.width.%]="a.utilizationPercent"></div>
+  </div>
+</div>

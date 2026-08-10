@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { Ausschluss } from '../../models/termin.model';
+import { Exclusion } from '../../models/appointment.model';
 
 @Component({
   selector: 'app-data-quality-banner',
@@ -10,7 +10,7 @@ import { Ausschluss } from '../../models/termin.model';
   styleUrl: './data-quality-banner.component.css',
 })
 export class DataQualityBannerComponent {
-  @Input() ausschluesse: Ausschluss[] = [];
-  @Input() fehlenderStatus = 0;
-  @Input() korrigierteDauerAnzahl = 0;
+  @Input() exclusions: Exclusion[] = [];
+  @Input() missingStatusCount = 0;
+  @Input() correctedDurationCount = 0;
 }

@@ -9,7 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
-import { Wochenstatistik } from '../../models/termin.model';
+import { WeeklyStatistic } from '../../models/appointment.model';
 
 Chart.register(...registerables);
 
@@ -30,7 +30,7 @@ Chart.register(...registerables);
   ],
 })
 export class TrendChartComponent implements AfterViewInit, OnChanges, OnDestroy {
-  @Input() wochen: Wochenstatistik[] = [];
+  @Input() weeks: WeeklyStatistic[] = [];
   @ViewChild('canvas') canvasRef!: ElementRef<HTMLCanvasElement>;
 
   private chart?: Chart;
@@ -40,7 +40,7 @@ export class TrendChartComponent implements AfterViewInit, OnChanges, OnDestroy 
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['wochen'] && this.canvasRef) {
+    if (changes['weeks'] && this.canvasRef) {
       this.render();
     }
   }
@@ -50,17 +50,17 @@ export class TrendChartComponent implements AfterViewInit, OnChanges, OnDestroy 
   }
 
   private render(): void {
-    if (!this.canvasRef || this.wochen.length === 0) return;
+    if (!this.canvasRef || this.weeks.length === 0) return;
     this.chart?.destroy();
 
     const config: ChartConfiguration<'line'> = {
       type: 'line',
       data: {
-        labels: this.wochen.map((w) => `${w.woche} (${w.zeitraumLabel})`),
+        labels: this.weeks.map((w) => `${w.week} (${w.periodLabel})`),
         datasets: [
           {
             label: 'Gebucht',
-            data: this.wochen.map((w) => w.gebuchtProzent),
+            data: this.weeks.map((w) => w.bookedPercent),
             borderColor: '#6B7A8D',
             backgroundColor: 'rgba(107,122,141,0.08)',
             borderWidth: 2,
@@ -70,7 +70,7 @@ export class TrendChartComponent implements AfterViewInit, OnChanges, OnDestroy 
           },
           {
             label: 'Realisiert',
-            data: this.wochen.map((w) => w.realisiertProzent),
+            data: this.weeks.map((w) => w.completedPercent),
             borderColor: '#0F6E6E',
             backgroundColor: 'rgba(15,110,110,0.12)',
             borderWidth: 2.5,
